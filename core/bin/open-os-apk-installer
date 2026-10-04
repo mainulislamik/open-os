@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Open OS - APK Installer & Mobile Runner
+# Usage: open-os-apk-installer <path_to_apk>
+# ==============================================================================
+
+set -e
+
+APK_PATH="$1"
+if [ -z "$APK_PATH" ] || [ ! -f "$APK_PATH" ]; then
+    echo "[!] Error: Please provide a valid .apk file."
+    exit 1
+fi
+
+COLOR_CYAN="\033[1;36m"
+COLOR_GREEN="\033[1;32m"
+COLOR_YELLOW="\033[1;33m"
+COLOR_RED="\033[1;31m"
+COLOR_RESET="\033[0m"
+
+echo -e "${COLOR_CYAN}[Open OS Android Engine]${COLOR_RESET} Preparing to run: $(basename "$APK_PATH")"
+
+# Check if Waydroid is installed
+if ! command -v waydroid >/dev/null 2>&1; then
+    echo -e "${COLOR_RED}[!] Waydroid is not installed on this system.${COLOR_RESET}"
+    echo "    Run: sudo open-os install-deps"
+    exit 1
+fi
+
+# Check if Waydroid container is initialized
+if [ ! -d "/var/lib/waydroid/images" ] && [ ! -d "/usr/share/waydroid-extra/images" ]; then
+    echo -e "${COLOR_YELLOW}[!] Waydroid image container is not initialized.${COLOR_RESET}"
+    echo -e "[*] Initializing Waydroid (first time only)..."
+    sudo waydroid init -s GAPPS || sudo waydroid init -s VANILLA
+fi
+
+# Ensure Waydroid container service is running
+if ! systemctl is-active --quiet waydroid-container 2>/dev/null; then
+    echo -e "[*] Starting Waydroid container service..."
+    sudo systemctl start waydroid-container || true
+fi
+
+# Check Wayland display
+if [ -z "$WAYLAND_DISPLAY" ]; then
+    echo -e "${COLOR_YELLOW}[!] Warning: You are not in a native Wayland session.${COLOR_RESET}"
+    echo "    Starting Weston/Cage Wayland bridge for Android compatibility..."
+fi
+
+# Install APK into Waydroid
+echo -e "${COLOR_GREEN}[*] Installing APK into Open OS Android Subsystem...${COLOR_RESET}"
+waydroid app install "$APK_PATH"
+
+echo -e "${COLOR_GREEN}[✓] APK installed successfully!${COLOR_RESET}"
+echo -e "[*] Launching Waydroid UI..."
+waydroid show-full-ui &

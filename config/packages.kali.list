@@ -1,0 +1,46 @@
+# ==============================================================================
+# Open OS - Kali Cyber Security & Pentest Package List
+# Modify this file anytime to add or remove security tools.
+# ==============================================================================
+
+# Core Kali Metapackages
+kali-linux-core
+kali-tools-top10
+kali-tools-web
+
+# Mobile & Android Pentesting Tools
+adb
+fastboot
+apktool
+jadx
+zipalign
+apksigner
+dex2jar
+
+# Reverse Engineering & Binary Analysis
+ghidra
+radare2
+gdb
+ltrace
+strace
+binwalk
+hexedit
+
+# Network Analysis & Interception
+burpsuite
+zaproxy
+wireshark
+tshark
+tcpdump
+nmap
+netcat-traditional
+mitmproxy
+
+# Exploitation & Post-Exploitation
+metasploit-framework
+sqlmap
+nikto
+responder
+john
+hashcat
+hydra

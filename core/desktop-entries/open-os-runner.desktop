@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Open OS Universal Runner
+Comment=Run or install file with Open OS Smart Dispatcher
+Exec=/usr/local/bin/open-os run %f
+Icon=utilities-terminal
+Terminal=true
+Categories=System;Utility;Security;
+NoDisplay=false

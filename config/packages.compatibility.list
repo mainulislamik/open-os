@@ -1,0 +1,35 @@
+# ==============================================================================
+# Open OS - Multi-Platform Compatibility Packages
+# Packages responsible for running Android (.apk), Windows (.exe), Flatpak, etc.
+# ==============================================================================
+
+# Android Execution (Waydroid & LXC Container Subsystem)
+waydroid
+lxc
+dnsmasq
+iptables
+nftables
+kmod
+curl
+ca-certificates
+python3-gbinder
+wl-clipboard
+
+# Windows Execution (.exe / .msi)
+wine
+wine64
+winetricks
+cabextract
+p7zip-full
+unrar
+
+# Universal Linux Packages
+flatpak
+fuse
+libfuse2
+libfuse3-3
+
+# Python & Pentesting Automation Bridges
+python3-pip
+python3-venv
+python3-requests

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Open OS - Windows Program Launcher
+Comment=Execute Windows binary in Open OS Wine Environment
+Exec=/usr/local/bin/open-os-exe-launcher %f
+Icon=application-x-executable
+Terminal=false
+Categories=System;Utility;
+MimeType=application/x-msdos-program;application/x-msdownload;application/x-wine-extension-msp;application/x-msi;
+NoDisplay=false

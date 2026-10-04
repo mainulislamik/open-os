@@ -1,0 +1,31 @@
+# ==============================================================================
+# Open OS - Desktop Environment & Wayland Compositor List
+# Wayland is required for smooth, hardware-accelerated Waydroid execution.
+# ==============================================================================
+
+# Core Desktop (Kali standard XFCE + Wayland complement or Sway/Weston)
+kali-desktop-xfce
+weston
+sway
+swaylock
+swayidle
+waybar
+wofi
+foot
+alacritty
+
+# Display & Media Servers
+pipewire
+pipewire-pulse
+wireplumber
+mesa-utils
+mesa-va-drivers
+vulkan-tools
+
+# GUI Utilities
+zenity
+yad
+libnotify-bin
+thunar
+thunar-archive-plugin
+file-roller

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Open OS - Android APK Installer
+Comment=Install and run Android application in Open OS Waydroid Subsystem
+Exec=/usr/local/bin/open-os-apk-installer %f
+Icon=system-software-install
+Terminal=false
+Categories=System;Utility;
+MimeType=application/vnd.android.package-archive;
+NoDisplay=false

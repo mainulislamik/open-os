@@ -1,0 +1,11 @@
+# Output ISO files and logs
+iso-builder/output/
+*.iso
+*.log
+*.sha512sum
+
+# VM runtime disks and screenshots
+vm-data/
+*.qcow2
+*.ppm
+vm-screenshot*.png

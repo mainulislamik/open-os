@@ -17,8 +17,8 @@ fi
 cd "$WORK_DIR"
 
 # Inject Open OS custom package lists into Kali configuration
-echo "[*] Injecting Open OS packages..."
-TARGET_PKG_DIR="$WORK_DIR/kali-config/variant-openos/package-lists"
+echo "[*] Injecting Open OS packages into common package lists..."
+TARGET_PKG_DIR="$WORK_DIR/kali-config/common/package-lists"
 mkdir -p "$TARGET_PKG_DIR"
 
 cat /build/config/packages.kali.list \
@@ -36,13 +36,14 @@ cp -f /build/config/open-os.conf "$TARGET_OVERLAY/etc/open-os/" || true
 cp -f /build/core/desktop-entries/* "$TARGET_OVERLAY/usr/share/applications/" || true
 chmod +x "$TARGET_OVERLAY/usr/local/bin/"* || true
 
-echo "[*] Building Open OS ISO (Variant: openos)..."
-./build.sh --distribution kali-rolling --variant openos --verbose
+mkdir -p /build/output
 
-if ls images/*.iso >/dev/null 2>&1; then
-    mkdir -p /build/output
-    cp -v images/*.iso /build/output/open-os-kali.iso
-    echo "[✓] ISO built successfully! Saved to: /build/output/open-os-kali.iso"
+echo "[*] Building Open OS ISO (Variant: xfce, Branch: kali-rolling)..."
+./build.sh --branch kali-rolling --variant xfce --output /build/output
+
+if ls /build/output/*.iso >/dev/null 2>&1; then
+    echo "[✓] ISO built successfully! Saved to: /build/output/"
+    ls -lh /build/output/*.iso
 else
     echo "[!] Build script ended. Check logs for details."
 fi

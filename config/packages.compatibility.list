@@ -18,16 +18,13 @@ wl-clipboard
 # Windows Execution (.exe / .msi)
 wine
 wine64
-winetricks
 cabextract
-p7zip-full
-unrar
+7zip
 
 # Universal Linux Packages
 flatpak
-fuse
-libfuse2
-libfuse3-3
+fuse3
+libfuse3-4
 
 # Python & Pentesting Automation Bridges
 python3-pip

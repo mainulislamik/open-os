@@ -21,9 +21,21 @@ echo "[*] Injecting Open OS packages into common package lists..."
 TARGET_PKG_DIR="$WORK_DIR/kali-config/common/package-lists"
 mkdir -p "$TARGET_PKG_DIR"
 
-cat /build/config/packages.kali.list \
-    /build/config/packages.compatibility.list \
-    /build/config/packages.desktop.list 2>/dev/null > "$TARGET_PKG_DIR/open-os.list.chroot" || true
+# Cleanly extract packages excluding comments and blank lines
+grep -h -v '^#' /build/config/packages.kali.list \
+                /build/config/packages.compatibility.list \
+                /build/config/packages.desktop.list 2>/dev/null | grep -v '^[[:space:]]*$' | sort -u > "$TARGET_PKG_DIR/open-os.list.chroot"
+
+# Add Winetricks setup hook
+TARGET_HOOK_DIR="$WORK_DIR/kali-config/common/hooks/live"
+mkdir -p "$TARGET_HOOK_DIR"
+cat << 'HOOK_EOF' > "$TARGET_HOOK_DIR/99-winetricks.hook.chroot"
+#!/bin/sh
+set -e
+curl -fsSL https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -o /usr/local/bin/winetricks || true
+chmod +x /usr/local/bin/winetricks || true
+HOOK_EOF
+chmod +x "$TARGET_HOOK_DIR/99-winetricks.hook.chroot"
 
 # Inject Open OS core binaries and desktop integration
 TARGET_OVERLAY="$WORK_DIR/kali-config/common/includes.chroot"
